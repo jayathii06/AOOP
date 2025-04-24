@@ -1,0 +1,625 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Contact Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <h1>Contact Management System</h1>
+        <input type="text" id="searchBar" placeholder="Search Contacts" onkeyup="searchContacts()">
+        <button onclick="toggleSavedContacts()">Saved Contacts</button>
+        <a href="login.html">Logout</a>
+    </div>
+
+    <div class="dashboard">
+        <div class="profile">
+            <img src="profile.png" alt="User">
+            <h2>Welcome, User</h2>
+        </div>
+
+        <div class="actions">
+            <button onclick="openPopup()">Add Contact</button>
+            <button>Import</button>
+            <button>Export</button>
+        </div>
+
+        <div class="contact-list" id="contactList">
+            <!-- Contacts will be displayed here -->
+        </div>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h2>Add Contact</h2>
+            <label for="contactPriority">Priority:</label>
+<input type="number" id="contactPriority" name="contactPriority" placeholder="Enter a number for priority">
+            <input type="text" id="contactName" placeholder="Name">
+            <input type="email" id="contactEmail" placeholder="Email">
+            <input type="text" id="contactPhone" placeholder="Phone Number">
+            <button onclick="saveContact()">Save</button>
+            <button onclick="closePopup()">Cancel</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+home.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Contact Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        .navbar h1 {
+            color: #333;
+        }
+        .navbar input {
+            padding: 8px;
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .navbar a {
+            text-decoration: none;
+            background: #2ebf91;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .home-container {
+            text-align: center;
+            margin-top: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            color: #555;
+        }
+        .btn {
+            display: inline-block;
+            background: #2ebf91;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: #28a87d;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Contact Management System</h1>
+        <input type="text" placeholder="Search Contacts">
+        <a href="login.html">Login</a>
+    </div>
+    <div class="home-container">
+        <h2>Welcome to Contact Management System</h2>
+        <p>Manage your contacts efficiently and securely.</p>
+        <a href="signup.html" class="btn">Get Started</a>
+    </div>
+</body>
+</html>
+
+login.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Contact Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background: #2ebf91;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #28a87d;
+        }
+        .link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .link a {
+            color: #2ebf91;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p class="link">Don't have an account? <a href="signup.html">Signup</a></p>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let enteredUsername = document.getElementById("username").value;
+            let enteredPassword = document.getElementById("password").value;
+            
+            let storedUsername = localStorage.getItem("username");
+            let storedPassword = localStorage.getItem("password");
+
+            if (enteredUsername === storedUsername && enteredPassword === storedPassword) {
+                alert("Login successful!");
+                window.location.href = "dashboard.html"; // Redirect to dashboard
+            } else {
+                alert("Incorrect username or password!");
+            }
+        });
+    </script>
+</body>
+</html>
+
+script.js
+function openPopup() {
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup() {
+    document.getElementById("popup").style.display = "none";
+}
+
+// Save contact to backend
+async function saveContact() {
+    let name = document.getElementById("contactName").value.trim();
+    let email = document.getElementById("contactEmail").value.trim();
+    let phone = document.getElementById("contactPhone").value.trim();
+    let priority = document.getElementById("contactPriority").value; // Priority can be any number now
+
+    if (!email.includes("@")) {
+        alert("Invalid email format!");
+        return;
+    }
+    if (phone.length !== 10  isNaN(phone)) {
+        alert("Phone number must be 10 digits!");
+        return;
+    }
+
+    const contactData = { name, email, phone };
+
+    try {
+        const res = await fetch('http://localhost:5000/contacts', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(contactData)
+        });
+
+        if (res.ok) {
+            alert("Contact saved to database!");
+            document.getElementById("contactName").value = "";
+            document.getElementById("contactEmail").value = "";
+            document.getElementById("contactPhone").value = "";
+            closePopup();
+            loadContacts(); // refresh UI
+        } else {
+            alert("Failed to save contact.");
+        }
+    } catch (error) {
+        console.error("Error saving contact:", error);
+        alert("Error connecting to backend.");
+    }
+}
+
+// Load contacts from backend
+async function loadContacts() {
+    try {
+        const res = await fetch('http://localhost:5000/contacts');
+        const contacts = await res.json();
+        let contactList = document.getElementById("contactList");
+        contactList.innerHTML = "";
+
+        contacts.forEach(contact => {
+            let newContact = document.createElement("div");
+            newContact.classList.add("contact-item");
+            newContact.innerHTML = `
+                <span>${contact.name} - ${contact.email} - ${contact.phone}</span>
+                <button onclick="deleteContact('${contact._id}')">Delete</button>
+            `;
+            contactList.appendChild(newContact);
+        });
+    } catch (error) {
+        console.error("Error loading contacts:", error);
+    }
+}
+
+// Delete contact from the backend
+async function deleteContact(contactId) {
+    try {
+        const res = await fetch(`http://localhost:5000/api/contacts/${contactId}`, {
+            method: 'DELETE',
+        });
+
+        if (res.ok) {
+            alert('Contact deleted!');
+            loadContacts(); // Reload the contacts after deletion
+        } else {
+            alert('Failed to delete contact.');
+        }
+    } catch (error) {
+        console.error("Error deleting contact:", error);
+        alert("Error deleting contact from backend.");
+    }
+}
+
+// Search contacts by name/email/phone
+function searchContacts() {
+    let filter = document.getElementById("searchBar").value.toUpperCase();
+    let contacts = document.getElementsByClassName("contact-item");
+    for (let i = 0; i < contacts.length; i++) {
+        let text = contacts[i].textContent  contacts[i].innerText;
+        contacts[i].style.display = text.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+    }
+}
+
+// Toggle contact list display
+function toggleSavedContacts() {
+    let contactList = document.getElementById("contactList");
+    contactList.style.display = contactList.style.display === "none" ? "block" : "none";
+}
+
+// Load contacts when page loads
+window.onload = () => {
+    loadContacts();
+};
+
+server.js
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const app = express();
+
+// MongoDB connection
+mongoose.connect('mongodb://127.0.0.1:27017/contactDB', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+// Define the contact schema
+const contactSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  phone: String,
+  priority: { type: Number, default: 0 },
+});
+
+// Create the model from the schema
+const Contact = mongoose.model('Contact', contactSchema);
+
+app.use(cors());
+app.use(express.json());
+
+// POST: Add new contact
+app.post('/contacts', async (req, res) => {
+  const { name, email, phone } = req.body;
+  try {
+    const contact = new Contact({ name, email, phone });
+    await contact.save();
+    res.status(201).json({ message: 'Contact saved!' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error saving contact' });
+  }
+});
+
+// GET: Get all contacts
+app.get('/contacts', async (req, res) => {
+  try {
+    const contacts = await Contact.find();
+    res.json(contacts);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching contacts' });
+  }
+});
+
+// DELETE: Delete a contact by ID
+// DELETE route to remove a contact from the database
+app.delete('/api/contacts/:id', async (req, res) => {
+    try {
+        const contactId = req.params.id;
+        const deletedContact = await Contact.findByIdAndDelete(contactId);
+
+        if (!deletedContact) {
+            return res.status(404).json({ message: 'Contact not found' });
+        }
+
+        res.status(200).json({ message: 'Contact deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting contact', error });
+    }
+});
+
+
+// Start the server
+app.listen(5000, () => {
+  console.log('Server started on http://localhost:5000');
+});
+
+signup.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup - Contact Management</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #8360c3, #2ebf91);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background: #2ebf91;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #28a87d;
+        }
+        .link {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        .link a {
+            color: #2ebf91;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Signup</h2>
+        <form id="signupForm">
+            <input type="text" id="username" placeholder="Enter Username" required>
+            <input type="password" id="password" placeholder="Enter Password" required>
+            <button type="submit">Signup</button>
+        </form>
+        <p class="link">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            
+            if (username && password) {
+                localStorage.setItem("username", username);
+                localStorage.setItem("password", password);
+                alert("Signup successful! Please login.");
+                window.location.href = "login.html"; // Redirect to login
+            } else {
+                alert("Please fill all fields.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+styles.css
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #8360c3, #2ebf91);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px 30px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar input {
+    padding: 8px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.navbar button {
+    background: #2ebf91;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dashboard {
+    text-align: center;
+    margin-top: 50px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.actions {
+    margin-bottom: 20px;
+}
+
+.contact-list {
+    text-align: left;
+}
+
+.contact-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content input {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    background: #2ebf91;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+
